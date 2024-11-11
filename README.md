@@ -12,6 +12,22 @@ Install the required libraries
 
 `pip install -r requirements.txt`
 
+## Configuration
+
+edit the .env file, if needed, to adapt the app to your personal needs.
+
+Explanation:
+
+`STEP=2000` → steps for the X axis. You shouldn't need to change this unless you want more or less granular output.
+
+`FILE_NAME`='data.csv' → name of the file that holds your data.
+
+`THRESHOLD_LEVELS=[70,80]` → What are the threshold levels for each warranty claim window.
+
+`THRESHOLD_LABELS=[3 Year Threshold','8 Year Threshold']` → Labels for the previous thresholds.
+
+`CHART_LIMITS=[60,100]` → Define minimum and maximum Y axis. Makes a more viewable graph.
+
 ## Usage
 
 Update your `data.csv` file with your own readings. The format has to be in form of:

@@ -1,23 +1,21 @@
+import os
+import json
 import matplotlib.pyplot as plt
 import pandas as pd
 from loguru import logger
 import numpy as np
-import os
 from dotenv import load_dotenv
-import json
 
 # Constants
 
 load_dotenv()
 
-
 CHART_LIMITS = json.loads(os.getenv('CHART_LIMITS'))
 STEP = int(os.getenv('STEP'))
 FILE_NAME = os.getenv('FILE_NAME')
-FIRST_LEVEL_THRESHOLD = int(os.getenv('FIRST_LEVEL_THRESHOLD'))
-LABEL_FIRST_LEVEL = os.getenv('LABEL_FIRST_LEVEL')
-SECOND_LEVEL_THRESHOLD = int(os.getenv('SECOND_LEVEL_THRESHOLD'))
-LABEL_SECOND_LEVEL = os.getenv('LABEL_SECOND_LEVEL')
+THRESHOLD_LEVELS = json.loads(os.getenv('THRESHOLD_LEVELS'))
+THRESHOLD_LABELS = json.loads(os.getenv('THRESHOLD_LABELS'))
+
 
 # Loading data using pandas and sorting values
 
@@ -27,7 +25,7 @@ df.sort_values('km', ascending=True, inplace=True)
 
 # Define the plot using km and health columns, styles and markers
 
-plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
+plt.plot(df['km'], dfimport json['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
 
 # Set limits for the y axis
 
@@ -43,8 +41,8 @@ plt.xticks(np.arange(0, max_km + STEP, STEP))
 
 # Adding horizontal lines for health thresholds
 
-plt.axhline(y=FIRST_LEVEL_THRESHOLD, color='orange', linestyle='dashed', label=LABEL_FIRST_LEVEL)
-plt.axhline(y=SECOND_LEVEL_THRESHOLD, color='red', linestyle='dashed', label=LABEL_SECOND_LEVEL)
+plt.axhline(y=THRESHOLD_LEVELS[0], color='orange', linestyle='dashed', label=THRESHOLD_LABELS[0])
+plt.axhline(y=THRESHOLD_LEVELS[1], color='red', linestyle='dashed', label=THRESHOLD_LABELS[1])
 
 # Set a background grid for the plot
 
@@ -58,5 +56,6 @@ plt.ylabel('Battery Health Percentage')
 plt.title("Battery Health Over Time")
 
 # Displaying the legend and the plot
+
 plt.legend()
 plt.show()
