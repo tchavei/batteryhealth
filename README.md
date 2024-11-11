@@ -8,6 +8,10 @@ Clone the required files with
 
 `git clone git@github.com:tchavei/batteryhealth.git`
 
+Install the required libraries
+
+`pip install -r requirements.txt`
+
 ## Usage
 
 Update your `data.csv` file with your own readings. The format has to be in form of:
