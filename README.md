@@ -24,7 +24,7 @@ Explanation:
 
 `THRESHOLD_LEVELS=[70,80]` → What are the threshold levels for each warranty claim window.
 
-`THRESHOLD_LABELS=[3 Year Threshold','8 Year Threshold']` → Labels for the previous thresholds.
+`THRESHOLD_LABELS=["3 Year Threshold","8 Year Threshold"]` → Labels for the previous thresholds.
 
 `CHART_LIMITS=[60,100]` → Define minimum and maximum Y axis. Makes a more viewable graph.
 
