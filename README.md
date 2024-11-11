@@ -37,4 +37,4 @@ Run the aplication from the terminal with:
 
 ## Preset Battery Health Thresholds
 
-Please note that by default the set thresholds (3 years, 8 years) and the corresponding levels
+Please note that by default the set thresholds (3 years, 8 years) and the corresponding levels (70% and 80%) may vary from EV manufacturer to EV manufacturer.
