@@ -25,7 +25,7 @@ df.sort_values('km', ascending=True, inplace=True)
 
 # Define the plot using km and health columns, styles and markers
 
-plt.plot(df['km'], dfimport json['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
+plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
 
 # Set limits for the y axis
 
@@ -56,6 +56,5 @@ plt.ylabel('Battery Health Percentage')
 plt.title("Battery Health Over Time")
 
 # Displaying the legend and the plot
-
 plt.legend()
 plt.show()
