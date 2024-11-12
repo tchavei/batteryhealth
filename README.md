@@ -18,7 +18,7 @@ Install the required libraries
 
 ## Configuration
 
-edit the .env file, if needed, to adapt the app to your personal needs.
+edit the `.env` file, if needed, to adapt the app to your personal needs.
 
 Explanation:
 
