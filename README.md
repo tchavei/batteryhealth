@@ -26,7 +26,7 @@ Explanation:
 
 `FILE_NAME`='data.csv' → name of the file that holds your data.
 
-`THRESHOLD_LEVELS=[70,80]` → What are the threshold levels for each warranty claim window.
+`THRESHOLD_LEVELS=[80,70]` → What are the threshold levels for each warranty claim window.
 
 `THRESHOLD_LABELS=["3 Year Threshold","8 Year Threshold"]` → Labels for the previous thresholds.
 
