@@ -1,8 +1,8 @@
 # EV Battery Health Graph
 
-![Graph](https://github.com/tchavei/batteryhealth/blob/main/example_bat.png)
-
 Graphical display of EV battery health over time
+
+![Graph](https://github.com/tchavei/batteryhealth/blob/main/example_bat.png)
 
 ## Installation
 
