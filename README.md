@@ -7,6 +7,8 @@ Graphical display of EV battery health over time
 Clone the required files with
 
 `git clone git@github.com:tchavei/batteryhealth.git`
+or
+`git clone https://github.com/tchavei/batteryhealth.git`
 
 Install the required libraries
 
