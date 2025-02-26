@@ -2,59 +2,77 @@ import os
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
-from loguru import logger
-import numpy as np
 from dotenv import load_dotenv
+import numpy as np
 
-# Constants
-
+# Load environment variables
 load_dotenv()
 
+# Constants
 CHART_LIMITS = json.loads(os.getenv('CHART_LIMITS'))
 STEP = int(os.getenv('STEP'))
 FILE_NAME = os.getenv('FILE_NAME')
 THRESHOLD_LEVELS = json.loads(os.getenv('THRESHOLD_LEVELS'))
 THRESHOLD_LABELS = json.loads(os.getenv('THRESHOLD_LABELS'))
 
+def load_and_prepare_data(file_name):
+    """
+    Load data from CSV and sort by 'km'.
+    
+    :param file_name: Name of the file to load the data from.
+    :return: Pandas DataFrame sorted by 'km'.
+    """
+    df = pd.read_csv(file_name)
+    df.sort_values('km', ascending=True, inplace=True)
+    return df
 
-# Loading data using pandas and sorting values
+def plot_battery_health_over_time(df, chart_limits, step, threshold_levels, threshold_labels):
+    """
+    Plots battery health over time with thresholds.
+    
+    :param df: DataFrame containing the data.
+    :param chart_limits: List with 2 elements for y-axis limits.
+    :param step: Step for x-axis ticks.
+    :param threshold_levels: Levels for health thresholds.
+    :param threshold_labels: Labels for the health thresholds.
+    """
 
-df = pd.read_csv(FILE_NAME)
+    # Plotting 'km' vs. 'health'
+    plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
 
-df.sort_values('km', ascending=True, inplace=True)
+    # Setting chart limits for both axes
+    plt.ylim(chart_limits[0], chart_limits[1])
 
-# Define the plot using km and health columns, styles and markers
+    # Rounding max 'km' to the nearest step and setting x-axis limits
+    max_km = round(df['km'].max(), + step)
+    plt.xticks(np.arange(0, max_km + step, step))
+    
+    # Adding threshold lines
+    for level, label in zip(threshold_levels, threshold_labels):
+        plt.axhline(y=level, color='red' if label.lower().startswith('8') else 'orange', linestyle='dashed', label=label)
+    
+    # Enhancing chart readability
+    plt.grid(which='major', axis='y', linestyle='-', color='#eeeeee', zorder=-1.0)
+    plt.grid(which='major', axis='x', linestyle='-', color='#eeeeee', zorder=-1.0)
+    
+    # Labeling axes and setting title
+    plt.xlabel('Kilometers (km)')
+    plt.ylabel('Battery Health (%)')
+    plt.title("Battery Health Over Kilometers")
+    
+    # Displaying the legend and plot
+    plt.legend()
+    plt.show()
 
-plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
+def main():
+    """
+    Main function to execute script tasks.
+    """
+    # Load and prepare data
+    df = load_and_prepare_data(FILE_NAME)
+    
+    # Plotting the data
+    plot_battery_health_over_time(df, CHART_LIMITS, STEP, THRESHOLD_LEVELS, THRESHOLD_LABELS)
 
-# Set limits for the y axis
-
-plt.ylim(CHART_LIMITS[0], CHART_LIMITS[1])
-
-# Set limits for the x axis based on max recorded km, rounded to the nearest 1000
- 
-max_km = round(df['km'].max(), -3)
-
-# Set the step for the x axis based on the constant STEP
-
-plt.xticks(np.arange(0, max_km + STEP, STEP)) 
-
-# Adding horizontal lines for health thresholds
-
-plt.axhline(y=THRESHOLD_LEVELS[0], color='orange', linestyle='dashed', label=THRESHOLD_LABELS[0])
-plt.axhline(y=THRESHOLD_LEVELS[1], color='red', linestyle='dashed', label=THRESHOLD_LABELS[1])
-
-# Set a background grid for the plot
-
-plt.grid(which='major', axis='y', zorder=-1.0, color='#eeeeee')
-plt.grid(which='major', axis='x', zorder=-1.0, color='#eeeeee')
-
-# Set labels and title for the axes and the plot
-
-plt.xlabel('Km')
-plt.ylabel('Battery Health Percentage')
-plt.title("Battery Health Over Time")
-
-# Displaying the legend and the plot
-plt.legend()
-plt.show()
+if __name__ == "__main__":
+    main()
