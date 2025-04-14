@@ -2,11 +2,8 @@ import os
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
-from loguru import logger
 import numpy as np
 from dotenv import load_dotenv
-
-# Constants
 
 # Load environment variables
 load_dotenv()
@@ -17,18 +14,6 @@ STEP = int(os.getenv('STEP'))
 FILE_NAME = os.getenv('FILE_NAME')
 THRESHOLD_LEVELS = json.loads(os.getenv('THRESHOLD_LEVELS'))
 THRESHOLD_LABELS = json.loads(os.getenv('THRESHOLD_LABELS'))
-
-
-def load_and_prepare_data(file_name):
-    """
-    Load data from CSV and sort by 'km'.
-    
-    :param file_name: Name of the file to load the data from.
-    :return: Pandas DataFrame sorted by 'km'.
-    """
-    df = pd.read_csv(file_name)
-    df.sort_values('km', ascending=True, inplace=True)
-    return df
 
 
 def load_and_prepare_data(file_name):
