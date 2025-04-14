@@ -31,21 +31,6 @@ def load_and_prepare_data(file_name):
     return df
 
 
-def plot_battery_health_over_time(df, chart_limits, step, threshold_levels, threshold_labels):
-    """
-    Plots battery health over time with thresholds.
-    
-    :param df: DataFrame containing the data.
-    :param chart_limits: List with 2 elements for y-axis limits.
-    :param step: Step for x-axis ticks.
-    :param threshold_levels: Levels for health thresholds.
-    :param threshold_labels: Labels for the health thresholds.
-    """
-
-    # Plotting 'km' vs. 'health'
-    plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
-
-
 def load_and_prepare_data(file_name):
     """
     Load data from CSV and sort by 'km'.
