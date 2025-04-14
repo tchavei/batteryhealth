@@ -2,15 +2,15 @@ import os
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
+from loguru import logger
+import numpy as np
 from dotenv import load_dotenv
-import numpy as np
-import numpy as np
 
-# Load environment variables
+# Constants
+
 # Load environment variables
 load_dotenv()
 
-# Constants
 # Constants
 CHART_LIMITS = json.loads(os.getenv('CHART_LIMITS'))
 STEP = int(os.getenv('STEP'))
@@ -72,8 +72,6 @@ def plot_battery_health_over_time(df, chart_limits, step, threshold_levels, thre
     # Plotting 'km' vs. 'health'
     plt.plot(df['km'], df['health'], color='blue', linestyle='solid', marker='D', label="Battery Health")
 
-    # Setting chart limits for both axes
-    plt.ylim(chart_limits[0], chart_limits[1])
     # Setting chart limits for both axes
     plt.ylim(chart_limits[0], chart_limits[1])
 
